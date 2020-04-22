@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --name vaccs --cap-add=SYS_PTRACE --privileged vaccs
