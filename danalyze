@@ -1,7 +1,9 @@
 #!/bin/bash
-while getopts "urmsfc:o:" opt
+while getopts "vurmsfc:o:" opt
 do
 case $opt in 
+  v) /bin/cat ./version.txt
+     exit;;
   c) SRC=`basename $OPTARG` 
      SRCS+="$SRC "
      SRCARGS+="-c $SRC ";;
@@ -16,6 +18,9 @@ shift $((OPTIND-1))
 EXEARGS=$@
 docker exec --privileged --user root vaccs sysctl -w kernel.yama.ptrace_scope=0
 docker exec --privileged --user root vaccs sysctl -w kernel.randomize_va_space=0
-docker cp $SRCS vaccs:/home/vaccs/
+for file in $SRCS
+do
+	docker cp $file vaccs:/home/vaccs/
+done
 docker exec --user vaccs vaccs analyze $ARGS $SRCARGS -o /home/vaccs/$EXE $EXEARGS
 docker cp vaccs:/home/vaccs/$EXE.vaccs $DIR/$EXE.vaccs
