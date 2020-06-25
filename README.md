@@ -8,7 +8,9 @@ After installing docker, use the following steps to run the analysis in a docker
 3. `./build`
 4. `./drun &`
 5. `./danalyze -u -r -c overflow.c -o ov 0123456789`
- 
+
+The analysis file will be named `ov.vaccs`.
+
 Command Syntax:
 
 `danalyze [-u] [-r] [-m] [-s] [-f] [-c <file>]+ -o <file> <application args>`
@@ -20,3 +22,5 @@ Options:
 - `-m` : analyze calls to malloc/free
 - `-s` : analyze secure data (beta)
 - `-f` : analyze file operations (beta)
+- `-c <file>` : compile and link `<file>`
+- `-o <file>` : name the executable `<file>`
