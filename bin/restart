@@ -1,5 +1,0 @@
-#!/bin/bash
-docker container kill vaccs
-docker container rm vaccs
-docker run --name vaccs --cap-add=SYS_PTRACE --privileged vaccs &
-echo "VACCS docker container restarted"
