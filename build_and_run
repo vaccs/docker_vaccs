@@ -1,0 +1,10 @@
+#!/bin/bash
+DIR=`dirname $0`
+docker container kill vaccs
+docker container rm vaccs
+docker image rm vaccs
+docker network rm vaccs-net
+docker network create vaccs-net
+docker build --tag vaccs $DIR 
+docker run --name vaccs --publish 127.0.0.1:3000:3000 --cap-add=SYS_PTRACE --privileged vaccs &
+echo "VACCS docker container built and started"
